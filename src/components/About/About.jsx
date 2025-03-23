@@ -9,6 +9,7 @@ import {
 } from "@mui/material";
 
 export const Nosotros = () => {
+  
   const compromisoManosImg =
     "http://fmcegestion.cl/donat/compromiso-manos.webp";
   const voluntariosImg = "http://fmcegestion.cl/donat/voluntarios.webp";
