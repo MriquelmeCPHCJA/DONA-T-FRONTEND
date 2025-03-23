@@ -1,35 +1,50 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  // Outlet,
+} from "react-router-dom";
+import Header from "./components/Layout/Header";
+import Footer from "./components/Layout/Footer";
+import Home from "./components/Home/Home";
+import Profile from "./components/Profile/Profile";
+import Register from "./components/Register/Register";
+import Login from "./components/Login/Login";
+// import CartState from "./contexts/cart/CartState";
+import ProductState from "./contexts/products/ProductState";
+import UserState from "./contexts/users/UserState";
+// import Protected from "./components/Protected/Protected";
+// import { AuthProvideer } from "./components/Auth/AuthProvideer";
+import SuccessPayment from "./components/Payment/Success";
+import CancelPayment from "./components/Payment/Cancel";
+import Contact from "./components/Home/Contact";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    // <CartState>
+    <UserState>
+      <ProductState>
+        <Router>
+          <Header />
+          <Routes>
+            {/* RUTAS PRIVADAS */}
+            <Route path="/perfil" element={<Profile />} />
+            {/* RUTAS DE AUTENTICACIÓN */}
+            <Route path="/registro" element={<Register />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/pago-exitoso" element={<SuccessPayment />} />
+            <Route path="/pago-cancelado" element={<CancelPayment />} />
+            {/* RUTAS PÚBLICAS */}
+            <Route path="/contacto" element={<Contact />} />
+
+            <Route path="/" element={<Home />} />
+          </Routes>
+          <Footer />
+        </Router>
+      </ProductState>
+    </UserState>
+    // </CartState>
+  );
 }
 
-export default App
+export default App;
